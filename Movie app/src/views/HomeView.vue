@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>🎬 סרטים</h1>
+    <h1>🎬 Movies</h1>
     <SearchBar v-model="movieStore.searchTerm" />
     <div v-if="movieStore.movies.length === 0">לא נמצאו סרטים</div>
     <div class="movie-grid">
