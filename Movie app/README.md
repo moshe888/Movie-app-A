@@ -1,8 +1,5 @@
-כמובן! הנה גרסה מקוצרת, מקצועית וברורה של `README.md` באנגלית לפרויקט שלך:
 
----
-
-````markdown
+ 
 # 🎬 Movie Catalog SPA – Vue + TypeScript
 
 A Single Page Application (SPA) for browsing and searching popular movies, built with **Vue 3**, **TypeScript**, **Vite**, **Pinia**, and styled with **Tailwind CSS**. Movie data is fetched from [The Movie Database (TMDb)](https://www.themoviedb.org/) API.
