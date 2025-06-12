@@ -1,17 +1,18 @@
 <template>
   <router-link
     :to="`/movie/${movie.id}`"
-    class="block bg-white rounded shadow-md p-4 hover:shadow-lg transition"
+    class="movie-wrapper"
   >
     <img
       v-if="movie.poster_path"
       :src="posterUrl"
       :alt="movie.title"
-      class="w-full rounded"
     />
-    <h2 class="text-lg font-bold mt-2">{{ movie.title }}</h2>
-    <p class="text-gray-500 text-sm">📅 {{ movie.release_date }}</p>
-    <p class="text-yellow-500 text-sm">⭐ {{ movie.vote_average }}</p>
+    <div class="card">
+      <h2>{{ movie.title }}</h2>
+      <p>📅 {{ movie.release_date }}</p>
+      <p>⭐ {{ movie.vote_average }}</p> 
+    </div>
   </router-link>
 </template>
 
@@ -36,12 +37,28 @@ const posterUrl = computed(() =>
 </script>
 
 <style scoped>
+.movie-wrapper {
+  display: block;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  padding: 16px;
+  transition: box-shadow 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.movie-wrapper:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
 .card {
-  border: 1px solid #ccc;
+  border: 1px solid #ffffff;
   border-radius: 8px;
   padding: 8px;
   text-align: center;
-  background-color: #fff;
+  background-color: #ffffff;
+  color: #131010;
 }
 
 img {
