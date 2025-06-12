@@ -2,7 +2,7 @@
  
 # 🎬 Movie Catalog SPA – Vue + TypeScript
 
-A Single Page Application (SPA) for browsing and searching popular movies, built with **Vue 3**, **TypeScript**, **Vite**, **Pinia**, and styled with **Tailwind CSS**. Movie data is fetched from [The Movie Database (TMDb)](https://www.themoviedb.org/) API.
+A Single Page Application (SPA) for browsing and searching popular movies, built with **Vue 3**, **TypeScript**, **Vite**, **Pinia**. Movie data is fetched from [The Movie Database (TMDb)](https://www.themoviedb.org/) API.
 
 ## 🚀 Live Demo
 [👉 Open the app on Netlify](https://movie-app-moshe.netlify.app/)
@@ -10,7 +10,6 @@ A Single Page Application (SPA) for browsing and searching popular movies, built
 ## 🛠️ Tech Stack
 - Vue 3 + Vite + TypeScript
 - Pinia (state management)
-- Tailwind CSS (styling)
 - Vue Router
 - Axios + TMDb API
 
