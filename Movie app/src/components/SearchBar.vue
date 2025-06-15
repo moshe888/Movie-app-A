@@ -2,7 +2,7 @@
   <input
     v-model="modelValue"
     @input="$emit('update:modelValue', modelValue)"
-    placeholder="חפש סרט..."
+    placeholder="search movie..."
     class="search-input"
   />
 </template>
@@ -13,11 +13,11 @@ const modelValue = defineModel<string>()
 
 <style scoped>
 .search-input {
-  width: 100%;
+  width: 85%;
   padding: 0.5rem;
   margin: 1rem 0;
   font-size: 1rem;
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
   border-radius: 4px;
 }
 </style>

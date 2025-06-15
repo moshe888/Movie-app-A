@@ -42,7 +42,7 @@ const posterUrl = computed(() =>
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-  padding: 16px;
+  padding: 4px;
   transition: box-shadow 0.3s ease;
   text-decoration: none;
   color: inherit;
