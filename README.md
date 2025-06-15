@@ -69,6 +69,19 @@ Deployed to [Netlify](https://www.netlify.com/) using:
 
 ---
 
+## 🧪 Tests
+
+This project uses [Vitest](https://vitest.dev/) for unit testing.
+
+- ✅ Pinia store tested (movieStore)
+- 🧪 Mocked API responses using `vi.mock`
+- 🧪 Tested both popular movies loading and search behavior
+
+### Run tests locally:
+```bash
+npx vitest
+
+
 ## 📁 Project Structure
 
 ```
