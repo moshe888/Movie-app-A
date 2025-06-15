@@ -13,7 +13,7 @@
 
       <div ref="scrollContainer" class="row-scroll">
         <MovieCard
-          v-for="movie in movies"
+          v-for="movie in movieList"
           :key="movie.id"
           :movie="movie"
         />
@@ -30,32 +30,38 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import api from '../api'
+import { ref, computed, onMounted } from 'vue'
+import { useMovieStore } from '../stores/movieStore'
 import MovieCard from './MovieCard.vue'
 
 const props = defineProps<{
   title: string
-  endpoint: string
+  endpoint: '/movie/popular' | '/movie/top_rated' | '/movie/upcoming'
 }>()
 
-const movies = ref<Array<{
-  id: number
-  title: string
-  release_date: string
-  vote_average: number
-  poster_path: string
-}>>([])
-
+const store = useMovieStore()
 const scrollContainer = ref<HTMLDivElement | null>(null)
 const showLeftArrow = ref(false)
 
-onMounted(async () => {
-  const res = await api.get(props.endpoint)
-  movies.value = res.data.results
+onMounted(() => {
+  const type = props.endpoint.split('/')[2] as 'popular' | 'top_rated' | 'upcoming'
+  store.fetchCategory(type)
 
   scrollContainer.value?.addEventListener('scroll', updateArrowVisibility)
   updateArrowVisibility()
+})
+
+const movieList = computed(() => {
+  switch (props.endpoint) {
+    case '/movie/popular':
+      return store.popularMovies
+    case '/movie/top_rated':
+      return store.topRatedMovies
+    case '/movie/upcoming':
+      return store.upcomingMovies
+    default:
+      return []
+  }
 })
 
 function scrollLeft() {
@@ -97,7 +103,7 @@ function updateArrowVisibility() {
   overflow-x: auto;
   scroll-behavior: smooth;
   padding: 0;
-  gap: 0; /* Remove gaps between cards */
+  gap: 0;
 }
 
 .row-scroll::-webkit-scrollbar {
@@ -106,7 +112,7 @@ function updateArrowVisibility() {
 
 .row-scroll > * {
   flex: 0 0 auto;
-  width: 250px;
+  width: 220px;
 }
 
 .scroll-btn {

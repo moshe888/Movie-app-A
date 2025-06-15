@@ -23,17 +23,11 @@
 <script setup lang="ts">
 import { onMounted, ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
+import type { Movie } from '../types/Movie'
+
 import api from '../api'
 
-interface Movie {
-  id: number
-  title: string
-  release_date: string
-  poster_path: string
-  backdrop_path: string
-  vote_average: number
-  overview: string
-}
+ 
 
 const route = useRoute()
 const movie = ref<Movie | null>(null)
@@ -54,13 +48,13 @@ onMounted(() => {
 const posterUrl = computed(() =>
   movie.value?.poster_path
     ? `https://image.tmdb.org/t/p/w500/${movie.value.poster_path}`
-    : ''
+    : '/placeholder-poster.png'
 )
 
 const backdropStyle = computed(() =>
   movie.value?.backdrop_path
     ? `background-image: url('https://image.tmdb.org/t/p/original/${movie.value.backdrop_path}');`
-    : ''
+    : 'background-color: #000;'
 )
 </script>
 

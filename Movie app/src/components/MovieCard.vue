@@ -26,15 +26,12 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
+import type { Movie } from '../types/Movie'
+
 const props = defineProps<{
-  movie: {
-    id: number
-    title: string
-    release_date: string
-    vote_average: number
-    poster_path: string
-  }
+  movie: Movie
 }>()
+
 
 const posterUrl = computed(() =>
   props.movie.poster_path
@@ -64,7 +61,7 @@ const shortDate = computed(() => props.movie.release_date?.split('-')[0] || '')
 
 img {
   width: 100%;
-  height: 300px;
+  height: 280px;
   object-fit: cover;
   display: block;
   border: none;

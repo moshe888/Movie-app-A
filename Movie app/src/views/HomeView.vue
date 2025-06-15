@@ -6,6 +6,7 @@
     <MovieRow title="🎬 Popular" endpoint="/movie/popular" />
     <MovieRow title="🌟 Top Rated" endpoint="/movie/top_rated" />
     <MovieRow title="⏳ Upcoming" endpoint="/movie/upcoming" />
+    
   </div>
 </template>
 

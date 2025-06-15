@@ -1,16 +1,16 @@
 <template>
   <div class="search-wrapper">
     <input
-      v-model="query"
+      v-model="store.searchTerm"
       @input="onInput"
       @focus="cancelHide"
       @blur="hideWithDelay"
       placeholder="🎬 Search for a movie..."
       class="search-input"
     />
-    <ul v-if="showSuggestions && suggestions.length" class="suggestion-list">
+    <ul v-if="showSuggestions && store.movies.length" class="suggestion-list">
       <li
-        v-for="movie in suggestions"
+        v-for="movie in store.movies.slice(0, 5)"
         :key="movie.id"
         @mousedown.prevent="selectMovie(movie)"
       >
@@ -30,28 +30,23 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import api from '../api'
+import { useMovieStore } from '../stores/movieStore'
 
+const store = useMovieStore()
 const emit = defineEmits(['select'])
-const query = ref('')
-const suggestions = ref<any[]>([])
 const showSuggestions = ref(false)
 let timeout: ReturnType<typeof setTimeout> | null = null
 
 async function onInput() {
-  if (query.value.length < 2) {
-    suggestions.value = []
+  if (store.searchTerm.length < 2) {
     return
   }
-
-  const res = await api.get('/search/movie', {
-    params: { query: query.value }
-  })
-  suggestions.value = res.data.results.slice(0, 5)
+  await store.fetchMovies()
+  showSuggestions.value = true
 }
 
 function selectMovie(movie: any) {
-  query.value = movie.title
+  store.searchTerm = movie.title
   showSuggestions.value = false
   emit('select', movie)
 }
