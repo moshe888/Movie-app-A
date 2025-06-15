@@ -20,7 +20,7 @@ export const useMovieStore = defineStore('movies', {
         const res = await api.get(endpoint, { params })
         this.movies = res.data.results
       } catch (err) {
-        console.error('שגיאה בשליפת סרטים:', err)
+          console.error('Failed to fetch movies from API:', err)
       }
     }
   }

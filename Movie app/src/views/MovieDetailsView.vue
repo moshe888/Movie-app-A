@@ -2,12 +2,13 @@
   <div v-if="movie">
     <h1>{{ movie.title }}</h1>
     <img :src="posterUrl" :alt="movie.title" />
-    <p><strong>תאריך יציאה:</strong> {{ movie.release_date }}</p>
-    <p><strong>דירוג:</strong> {{ movie.vote_average }}</p>
+        <p><strong>Release Date:</strong> {{ movie.release_date }}</p>
+        <p><strong>Rating:</strong> {{ movie.vote_average }}</p>
+
     <p>{{ movie.overview }}</p>
-    <router-link to="/">🔙 חזרה</router-link>
+    <router-link to="/">🔙 Back</router-link>
   </div>
-  <div v-else>טוען...</div>
+  <div v-else>Loading...</div>
 </template>
 
 <script setup lang="ts">
