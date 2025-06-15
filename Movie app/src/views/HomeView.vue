@@ -2,7 +2,7 @@
   <div class="home-container">
     <h1 class="main-title">🎬 Movie Catalog</h1>
     
-    <SearchBar v-model="searchTerm" />
+    <SearchBar @select="onMovieSelect" />
     <MovieRow title="🎬 Popular" endpoint="/movie/popular" />
     <MovieRow title="🌟 Top Rated" endpoint="/movie/top_rated" />
     <MovieRow title="⏳ Upcoming" endpoint="/movie/upcoming" />
@@ -10,11 +10,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { useRouter } from 'vue-router'
 import MovieRow from '../components/MovieRow.vue'
 import SearchBar from '../components/SearchBar.vue'
 
-const searchTerm = ref('')
+const router = useRouter()
+
+function onMovieSelect(movie: { id: number }) {
+  router.push(`/movie/${movie.id}`)
+}
 </script>
 
 <style scoped>
@@ -25,8 +29,6 @@ const searchTerm = ref('')
   min-height: 100vh;
   box-sizing: border-box;
   overflow-y: auto;
-  padding: 2rem;
   padding-top: 4rem;
 }
 </style>
- 
