@@ -1,55 +1,82 @@
 
- 
-# 🎬 Movie Catalog SPA – Vue + TypeScript
+# 🎬 Movie Catalog (Vue + TypeScript)
 
-A Single Page Application (SPA) for browsing and searching popular movies, built with **Vue 3**, **TypeScript**, **Vite**, **Pinia**. Movie data is fetched from [The Movie Database (TMDb)](https://www.themoviedb.org/) API.
+A modern single-page application for browsing and searching movies using the TMDb API. Built with Vue 3, TypeScript, Pinia, and Vue Router.
 
-## 🚀 Live Demo
+---
+
+## 🚀 Live Demo  
 [👉 Open the app on Netlify](https://movie-app-moshe.netlify.app/)
 
-## 🛠️ Tech Stack
-- Vue 3 + Vite + TypeScript
-- Pinia (state management)
-- Vue Router
-- Axios + TMDb API
+---
 
-## 🔍 Features
-- Browse trending/popular movies
-- Search movies by title
-- View movie details: title, release date, rating, poster, and overview
-- Fully responsive UI
+## 🔑 Features
 
-## 📦 Project Setup (Local Development)
+- Browse popular movies with poster, rating, and release date
+- Real-time search by title
+- View detailed movie information (overview, rating, release date)
+- Smooth SPA navigation with Vue Router
+- Centralized state management with Pinia
+- Deployed on Netlify
+
+---
+
+## 👤 User Stories
+
+- As a user, I want to browse trending movies to discover new content.
+- As a user, I want to search for a movie by title and get instant results.
+- As a user, I want to view detailed info when I click a movie card.
+- As a user, I want a clear, responsive, and easy-to-use interface.
+
+---
+
+## ⚙️ Setup
 
 ```bash
-# Install dependencies
+git clone https://github.com/your-username/semperis-vue-movies.git
+cd semperis-vue-movies
 npm install
-
-# Run the development server
 npm run dev
-
-# Build for production
-npm run build
 ````
 
-## 🔐 Environment Variables
+---
 
-To run locally, create a `.env` file and add your TMDb token:
+## 🌐 Environment Variables
+
+Create a `.env` file:
 
 ```env
-VITE_TMDB_TOKEN=your_tmdb_bearer_token_here
+VITE_TMDB_TOKEN=your_tmdb_token_here
 ```
+
+---
+
+## 📦 Build for Production
+
+```bash
+npm run build
+```
+
+---
+
+## ☁️ Deployment
+
+Deployed to [Netlify](https://www.netlify.com/) using:
+
+* Build command: `npm run build`
+* Publish directory: `dist`
+* Environment variable: `VITE_TMDB_TOKEN`
+
+---
 
 ## 📁 Project Structure
 
 ```
 src/
-│
-├── components/        // Reusable UI components
-├── views/             // Pages (Home, Movie Details)
-├── stores/            // Pinia store
-├── router/            // Vue Router config
-├── api.ts             // Axios instance with TMDb setup
-└── main.ts            // App entry point
-```
-
+├── components/         // MovieCard, SearchBar
+├── views/              // HomeView, MovieDetailsView
+├── stores/             // Pinia store for movies
+├── router/             // Vue Router setup
+├── api.ts              // Axios TMDb instance
+└── main.ts             // App initialization
+ 
