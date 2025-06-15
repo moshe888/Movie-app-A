@@ -142,6 +142,6 @@ h1 {
   padding: 5rem;
   font-size: 1.5rem;
   background-color: #111;
-  color: #992f2f;
+  color: #858585;
 }
 </style>

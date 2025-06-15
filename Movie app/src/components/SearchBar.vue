@@ -3,7 +3,7 @@
     <input
       v-model="query"
       @input="onInput"
-      @focus="showSuggestions = true"
+      @focus="cancelHide"
       @blur="hideWithDelay"
       placeholder="🎬 Search for a movie..."
       class="search-input"
@@ -57,7 +57,15 @@ function selectMovie(movie: any) {
 }
 
 function hideWithDelay() {
-  timeout = setTimeout(() => (showSuggestions.value = false), 200)
+  if (timeout) clearTimeout(timeout)
+  timeout = setTimeout(() => {
+    showSuggestions.value = false
+  }, 200)
+}
+
+function cancelHide() {
+  if (timeout) clearTimeout(timeout)
+  showSuggestions.value = true
 }
 </script>
 
