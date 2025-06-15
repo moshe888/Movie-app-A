@@ -9,9 +9,16 @@
       :alt="movie.title"
     />
     <div class="movie-info">
-      <span class="title">{{ movie.title }}</span>
-      <span class="meta">📅 {{ shortDate }}</span>
-      <span class="meta">⭐ {{ movie.vote_average }}</span>
+      <h3
+        class="movie-title"
+        :title="movie.title"
+      >
+        {{ movie.title }}
+      </h3>
+      <div class="movie-meta">
+        <span>📅 {{ shortDate }}</span>
+        <span>⭐ {{ movie.vote_average }}</span>
+      </div>
     </div>
   </router-link>
 </template>
@@ -40,8 +47,8 @@ const shortDate = computed(() => props.movie.release_date?.split('-')[0] || '')
 
 <style scoped>
 .movie-card {
-  width: 180px;
-  border-radius: 8px;
+  width: 200px;
+  border-radius: 0;
   overflow: hidden;
   background-color: #141414;
   text-decoration: none;
@@ -51,41 +58,46 @@ const shortDate = computed(() => props.movie.release_date?.split('-')[0] || '')
   flex-direction: column;
 }
 
-
 .movie-card:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
 img {
   width: 100%;
-  height: 240px;
-  object-fit: contain; /* במקום cover */
-  background-color: #000; /* שומר מראה נקי מסביב לתמונה */
+  height: 300px;
+  object-fit: cover;
   display: block;
-  border-bottom: 1px solid #222;
+  border: none;
 }
-
-
 
 .movie-info {
-  padding: 0.4rem 0.6rem;
+  width: 100%;
+  padding: 0.5rem;
   background-color: #1e1e1e;
   color: #eee;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 0.3rem;
+  box-sizing: border-box;
 }
 
-.title {
+.movie-title {
+  font-size: 1rem;
   font-weight: 600;
+  color: #fff;
+  margin: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-align: center;
+  cursor: default;
 }
 
-.meta {
-  color: #aaa;
+.movie-meta {
+  display: flex;
+  justify-content: space-between;
   font-size: 0.75rem;
+  color: #bbb;
 }
 </style>

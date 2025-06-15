@@ -39,7 +39,14 @@ const props = defineProps<{
   endpoint: string
 }>()
 
-const movies = ref([])
+const movies = ref<Array<{
+  id: number
+  title: string
+  release_date: string
+  vote_average: number
+  poster_path: string
+}>>([])
+
 const scrollContainer = ref<HTMLDivElement | null>(null)
 const showLeftArrow = ref(false)
 
@@ -89,7 +96,8 @@ function updateArrowVisibility() {
   display: flex;
   overflow-x: auto;
   scroll-behavior: smooth;
-  padding: 0 2rem;
+  padding: 0;
+  gap: 0; /* Remove gaps between cards */
 }
 
 .row-scroll::-webkit-scrollbar {
