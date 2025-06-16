@@ -13,11 +13,15 @@ export interface Movie {
 
 export const useMovieStore = defineStore('movies', {
   state: () => ({
-    movies: [] as Movie[],  
-    categoryMovies: {} as Record<string, Movie[]>,  
+    movies: [] as Movie[],
+    categoryMovies: {} as Record<string, Movie[]>,
+    selectedMovie: null as Movie | null,
     searchTerm: '',
     isLoading: false,
-    error: ''
+    error: '',
+    favorites: [] as Movie[]
+
+
   }),
 
   getters: {
@@ -50,7 +54,7 @@ export const useMovieStore = defineStore('movies', {
 
     async fetchCategory(type: string) {
       try {
-         if (this.categoryMovies[type]?.length) return
+        if (this.categoryMovies[type]?.length) return
 
         const res = await api.get(`/movie/${type}`)
         const results = res.data.results || []
@@ -58,6 +62,34 @@ export const useMovieStore = defineStore('movies', {
       } catch (err) {
         console.error(`Failed to fetch ${type} movies:`, err)
       }
-    }
+    },
+
+    async fetchMovieById(id: number) {
+      try {
+        const { data } = await api.get(`/movie/${id}`)
+        this.selectedMovie = data
+      } catch (err) {
+        console.error('Failed to fetch movie by ID:', err)
+      }
+    },
+    resetSearch() {
+      this.searchTerm = ''
+      this.movies = []
+    },
+    toggleFavorite(movie: Movie) {
+  const exists = this.favorites.find(m => m.id === movie.id)
+  if (exists) {
+    this.favorites = this.favorites.filter(m => m.id !== movie.id)
+  } else {
+    this.favorites.push(movie)
+  }
+  localStorage.setItem('favorites', JSON.stringify(this.favorites))
+},
+
+loadFavorites() {
+  const stored = localStorage.getItem('favorites')
+  this.favorites = stored ? JSON.parse(stored) : []
+}
+
   }
 })

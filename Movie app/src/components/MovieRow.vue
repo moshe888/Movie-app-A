@@ -51,6 +51,8 @@ onMounted(() => {
   updateArrowVisibility()
 })
 
+
+
 const movieList = computed(() => store.categoryMovies[type] || [])
 
 function scrollLeft() {

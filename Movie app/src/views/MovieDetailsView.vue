@@ -21,29 +21,21 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, computed } from 'vue'
+import { onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
-import type { Movie } from '../types/Movie'
+import { useMovieStore } from '../stores/movieStore'
 
-import api from '../api'
-
- 
-
+const store = useMovieStore()
 const route = useRoute()
-const movie = ref<Movie | null>(null)
-
-const fetchMovie = async () => {
-  try {
-    const { data } = await api.get(`/movie/${route.params.id}`)
-    movie.value = data
-  } catch (error) {
-    console.error('Failed to fetch movie:', error)
-  }
-}
 
 onMounted(() => {
-  fetchMovie()
+  const id = Number(route.params.id)
+  if (!isNaN(id)) {
+    store.fetchMovieById(id)
+  }
 })
+
+const movie = computed(() => store.selectedMovie)
 
 const posterUrl = computed(() =>
   movie.value?.poster_path
