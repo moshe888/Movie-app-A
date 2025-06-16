@@ -1,12 +1,12 @@
 <template>
   <div class="home-container">
-    <h1 class="main-title">🎬 Movie Catalog</h1>
-    
+    <h1 class="main-title"> Movie Catalog</h1>
+
     <SearchBar @select="onMovieSelect" />
+
     <MovieRow title="🎬 Popular" endpoint="/movie/popular" />
     <MovieRow title="🌟 Top Rated" endpoint="/movie/top_rated" />
     <MovieRow title="⏳ Upcoming" endpoint="/movie/upcoming" />
-    
   </div>
 </template>
 

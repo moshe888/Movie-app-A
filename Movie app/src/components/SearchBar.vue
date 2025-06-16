@@ -5,7 +5,7 @@
       @input="onInput"
       @focus="cancelHide"
       @blur="hideWithDelay"
-      placeholder="🎬 Search for a movie..."
+      placeholder=" Search for a movie..."
       class="search-input"
     />
     <ul v-if="showSuggestions && store.movies.length" class="suggestion-list">
@@ -21,7 +21,9 @@
         />
         <div class="suggestion-info">
           <span class="suggestion-title">{{ movie.title }}</span>
-          <span class="suggestion-meta">📅 {{ movie.release_date?.split('-')[0] || 'N/A' }}</span>
+          <span class="suggestion-meta">
+            📅 {{ movie.release_date?.split('-')[0] || 'N/A' }}
+          </span>
         </div>
       </li>
     </ul>
@@ -34,13 +36,12 @@ import { useMovieStore } from '../stores/movieStore'
 
 const store = useMovieStore()
 const emit = defineEmits(['select'])
+
 const showSuggestions = ref(false)
 let timeout: ReturnType<typeof setTimeout> | null = null
 
 async function onInput() {
-  if (store.searchTerm.length < 2) {
-    return
-  }
+  if (store.searchTerm.length < 2) return
   await store.fetchMovies()
   showSuggestions.value = true
 }

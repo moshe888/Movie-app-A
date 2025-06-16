@@ -13,14 +13,13 @@ export interface Movie {
 
 export const useMovieStore = defineStore('movies', {
   state: () => ({
-    movies: [] as Movie[],
-    popularMovies: [] as Movie[],
-    topRatedMovies: [] as Movie[],
-    upcomingMovies: [] as Movie[],
+    movies: [] as Movie[],  
+    categoryMovies: {} as Record<string, Movie[]>,  
     searchTerm: '',
     isLoading: false,
     error: ''
   }),
+
   getters: {
     hasResults(state): boolean {
       return state.movies.length > 0
@@ -29,6 +28,7 @@ export const useMovieStore = defineStore('movies', {
       return !state.isLoading && state.movies.length === 0 && !state.error
     }
   },
+
   actions: {
     async fetchMovies() {
       this.isLoading = true
@@ -48,14 +48,13 @@ export const useMovieStore = defineStore('movies', {
       }
     },
 
-    async fetchCategory(type: 'popular' | 'top_rated' | 'upcoming') {
+    async fetchCategory(type: string) {
       try {
+         if (this.categoryMovies[type]?.length) return
+
         const res = await api.get(`/movie/${type}`)
         const results = res.data.results || []
-
-        if (type === 'popular') this.popularMovies = results
-        if (type === 'top_rated') this.topRatedMovies = results
-        if (type === 'upcoming') this.upcomingMovies = results
+        this.categoryMovies[type] = results
       } catch (err) {
         console.error(`Failed to fetch ${type} movies:`, err)
       }

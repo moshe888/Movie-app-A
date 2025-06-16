@@ -36,33 +36,22 @@ import MovieCard from './MovieCard.vue'
 
 const props = defineProps<{
   title: string
-  endpoint: '/movie/popular' | '/movie/top_rated' | '/movie/upcoming'
+  endpoint: `/movie/${string}`
 }>()
 
 const store = useMovieStore()
 const scrollContainer = ref<HTMLDivElement | null>(null)
 const showLeftArrow = ref(false)
 
-onMounted(() => {
-  const type = props.endpoint.split('/')[2] as 'popular' | 'top_rated' | 'upcoming'
-  store.fetchCategory(type)
+const type = props.endpoint.split('/')[2]
 
+onMounted(() => {
+  store.fetchCategory(type)
   scrollContainer.value?.addEventListener('scroll', updateArrowVisibility)
   updateArrowVisibility()
 })
 
-const movieList = computed(() => {
-  switch (props.endpoint) {
-    case '/movie/popular':
-      return store.popularMovies
-    case '/movie/top_rated':
-      return store.topRatedMovies
-    case '/movie/upcoming':
-      return store.upcomingMovies
-    default:
-      return []
-  }
-})
+const movieList = computed(() => store.categoryMovies[type] || [])
 
 function scrollLeft() {
   scrollContainer.value?.scrollBy({ left: -400, behavior: 'smooth' })
