@@ -94,7 +94,7 @@ function updateArrowVisibility() {
   overflow-x: auto;
   scroll-behavior: smooth;
   padding: 0;
-  gap: 0;
+  gap: 1px;
 }
 
 .row-scroll::-webkit-scrollbar {

@@ -1,15 +1,7 @@
 import { defineStore } from 'pinia'
 import api from '../api'
 
-export interface Movie {
-  id: number
-  title: string
-  release_date: string
-  poster_path: string
-  vote_average: number
-  overview: string
-  backdrop_path?: string
-}
+import type { Movie } from '../types/Movie'
 
 export const useMovieStore = defineStore('movies', {
   state: () => ({
@@ -20,18 +12,16 @@ export const useMovieStore = defineStore('movies', {
     isLoading: false,
     error: '',
     favorites: [] as Movie[]
-
-
   }),
 
-  getters: {
-    hasResults(state): boolean {
-      return state.movies.length > 0
-    },
-    noResults(state): boolean {
-      return !state.isLoading && state.movies.length === 0 && !state.error
-    }
-  },
+  // getters: {
+  //   hasResults(state): boolean {
+  //     return state.movies.length > 0
+  //   },
+  //   noResults(state): boolean {
+  //     return !state.isLoading && state.movies.length === 0 && !state.error
+  //   }
+  // },
 
   actions: {
     async fetchMovies() {

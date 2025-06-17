@@ -11,7 +11,7 @@
         :alt="movie.title"
       />
       <div class="info">
-        <h3>{{ movie.title }}</h3>
+          <h3 :title="movie.title">{{ movie.title }}</h3>
         <div class="meta">
           <span>📅 {{ shortDate }}</span>
           <span>⭐ {{ movie.vote_average }}</span>
