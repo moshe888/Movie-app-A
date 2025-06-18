@@ -54,14 +54,19 @@ export const useMovieStore = defineStore('movies', {
       }
     },
 
-    async fetchMovieById(id: number) {
-      try {
-        const { data } = await api.get(`/movie/${id}`)
-        this.selectedMovie = data
-      } catch (err) {
-        console.error('Failed to fetch movie by ID:', err)
+      async fetchMovieById(id: number) {
+        this.selectedMovie = null
+        this.isLoading = true
+        try {
+          const { data } = await api.get(`/movie/${id}`)
+          this.selectedMovie = data
+        } catch (err) {
+          console.error('Failed to fetch movie by ID:', err)
+        } finally {
+          this.isLoading = false
+        }
       }
-    },
+,
     resetSearch() {
       this.searchTerm = ''
       this.movies = []
